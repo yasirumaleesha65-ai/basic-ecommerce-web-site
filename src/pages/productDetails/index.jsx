@@ -9,6 +9,7 @@ function ProductDetailsPage() {
     loading,
     setLoading,
     handleCartProducts,
+    cartDetails,
   } = useContext(shoppingCartContext);
 
   const { id } = useParams();
@@ -51,10 +52,14 @@ function ProductDetailsPage() {
           <h1 className="text-5xl font-extrabold">{productDetails.title}</h1>
           <h2 className="my-6 text-4xl font-bold">${productDetails.price}</h2>
           <button
+            disabled={
+              cartDetails.findIndex((item) => item.id === productDetails.id) >
+              -1
+            }
             onClick={() => {
               handleCartProducts(productDetails);
             }}
-            className="border-4 border-black w-[400px] text-3xl "
+            className=" disabled:opacity-55 border-4 border-black w-[400px] text-3xl "
           >
             Add to Cart
           </button>
